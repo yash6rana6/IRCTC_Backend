@@ -5,6 +5,7 @@ require('dotenv').config();
 const config = require('./config/index').config;
 const logger = require('./config/logger');
 const errorMiddleware = require('./middlewares/error.middleware');
+const authRoute = require('./routes/auth.route');
 
 const app = express();
 app.use(helmet());
@@ -18,10 +19,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+  res.status(200).json({ status: 'ok', v: 2 });
 });
 
+app.use('/api/v1/auth', authRoute);
 app.use(errorMiddleware);
+
+
+
+
 
 const startService = async () => {
   try {

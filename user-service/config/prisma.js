@@ -12,3 +12,5 @@ if (!globalPrisma.prisma) {
         log:[ 'error', 'warn', 'info' ],
      });
 }
+
+exports.prisma = globalPrisma.prisma;

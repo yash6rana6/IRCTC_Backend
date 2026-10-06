@@ -38,3 +38,10 @@ class ConflictError extends AppError {
     }
 }
 
+
+exports.AppError = AppError;
+exports.BadRequestError = BadRequestError;
+exports.UnauthorizedError = UnauthorizedError;
+exports.ForbiddenError = ForbiddenError;
+exports.NotFoundError = NotFoundError;
+exports.ConflictError = ConflictError;  

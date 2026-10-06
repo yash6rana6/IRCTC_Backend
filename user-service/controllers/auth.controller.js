@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
-const { BadRequestError } = require("../utils/errors");
+const { BadRequestError } = require("../utils/error");
 const authService = require("../services/auth.service");
-const config = require("../config/config");
+const config = require("../config/index");
 
 exports.sendOTP = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;

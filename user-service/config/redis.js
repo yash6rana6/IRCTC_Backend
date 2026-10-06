@@ -1,14 +1,13 @@
 
 const Redis = require('ioredis');
-const config = require('./config');
 const logger = require('./logger');
+const config  = require('./index');
 
 class RedisClient {
     static instance = null;
     static isConnected = false;
 
     constructor() {
-        // Prevent direct instantiation
         if (RedisClient.instance) {
             return RedisClient.instance;
         }
@@ -20,7 +19,9 @@ class RedisClient {
 
     static getInstance() {
         if (!RedisClient.instance) {
-            RedisClient.instance = new Redis(config.Redis_URL, {
+
+            console.log("The redis url",config.REDIS_URL)
+            RedisClient.instance = new Redis(config.REDIS_URL, {
                 retryStrategy(times) {
                     const delay = Math.min(times * 50, 2000);
 
@@ -30,8 +31,7 @@ class RedisClient {
                 },
 
                 maxRetriesPerRequest: 3,
-
-                // Don't continuously retry commands while Redis is unavailable
+                
                 enableReadyCheck: true,
             });
 

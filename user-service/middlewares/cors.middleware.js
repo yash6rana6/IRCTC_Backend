@@ -1,5 +1,5 @@
 const cors = require('cors');
-const config = require('../config/config');
+const config = require('../config/index');
 
 const corsMiddleware = cors({
  origin:config.ALLOWED_ORIGINS.split(','),
