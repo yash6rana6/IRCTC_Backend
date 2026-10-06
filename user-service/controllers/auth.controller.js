@@ -1,7 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const { BadRequestError } = require("../utils/error");
 const authService = require("../services/auth.service");
-const config = require("../config/index");
+const { config } = require("../config/index");
+const verifyOTP = require("../services/auth.service");
 
 exports.sendOTP = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
@@ -32,3 +33,20 @@ exports.sendOTP = asyncHandler(async (req, res) => {
       message: "OTP sent successfully",
     });
 });
+
+exports.verifyOTP = asyncHandler(async (req , res) => {
+  const {otp} = req.body;
+  const otpSessionId = req.cookies.otp_session;
+
+  if(!otp || !otpSessionId){
+    throw new BadRequestError("otp or otpSessionId is missing");
+  }
+
+  const user = await verifyOTP(otp,otpSessionId);
+  return res.status(201).json({
+    success:true,
+    message:"User Account created successfully",
+    data:user
+  })
+
+})

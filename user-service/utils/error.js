@@ -38,6 +38,13 @@ class ConflictError extends AppError {
     }
 }
 
+class TooManyRequestsError extends AppError {
+    constructor(message, code = 'TOO_MANY_REQUESTS') {
+        super(code, message, 429);
+    }
+}
+
+exports.TooManyRequestsError = TooManyRequestsError;
 
 exports.AppError = AppError;
 exports.BadRequestError = BadRequestError;

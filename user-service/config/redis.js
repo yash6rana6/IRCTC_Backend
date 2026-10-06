@@ -1,7 +1,7 @@
 
 const Redis = require('ioredis');
 const logger = require('./logger');
-const config  = require('./index');
+const {config}  = require('./index');
 
 class RedisClient {
     static instance = null;
