@@ -8,6 +8,7 @@ class RedisClient {
     static isConnected = false;
 
     constructor() {
+        console.log(config);
         if (RedisClient.instance) {
             return RedisClient.instance;
         }
